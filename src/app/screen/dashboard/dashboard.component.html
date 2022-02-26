@@ -1,1 +1,27 @@
-<div>dashboard works!</div>
+<div class="container">
+  <h1>Óla Bem-vindo de volta!</h1>
+  <div class="breadcrumbs">
+    <!-- <mat-icon aria-hidden="false">home</mat-icon> -->
+    <span class="breadcrumbs-span">Homes</span>
+    <span class="breadcrumbs-span"> / </span>
+    <span class="breadcrumbs-span-active">Dashboard</span>
+  </div>
+
+  <mat-grid-list cols="2">
+    <mat-grid-tile>
+      <mat-card class="card">
+        <div id="chart">
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [labels]="chartOptions.labels"
+            [responsive]="chartOptions.responsive"
+          ></apx-chart>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="card">Simple card</mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
