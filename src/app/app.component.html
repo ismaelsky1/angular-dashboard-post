@@ -1,15 +1,23 @@
 <mat-drawer-container class="layout">
   <mat-drawer class="side" mode="side" opened>
-
-    <img class="logo" src="../assets/logo-box.png">
-    <mat-selection-list [multiple]="false" >
-      <mat-list-option  class="item" [routerLink]="page" *ngFor="let page of listMenu" [value]="page">
-        {{ page }}
+    <a routerLink="Dashboard">
+      <img class="logo" src="../assets/logo-box.png" />
+    </a>
+    <mat-selection-list aria-live="" [multiple]="false">
+      <mat-list-option
+        #item
+        class="item"
+        routerLink="dashboard"
+        value="Dashboard"
+      >
+        Dashboard
+      </mat-list-option>
+      <mat-list-option #item class="item" routerLink="post" value="Post">
+        Post
       </mat-list-option>
     </mat-selection-list>
   </mat-drawer>
   <mat-drawer-content class="content">
-  
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

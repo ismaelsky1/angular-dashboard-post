@@ -12,12 +12,12 @@ const routerOptions: ExtraOptions = {
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/Dashboard',
+    redirectTo: '/dashboard',
     pathMatch: 'full',
     // canActivate: [AuthGuard],
   },
-  { path: 'Dashboard', component: DashboardComponent },
-  { path: 'Post', component: PostComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'post', component: PostComponent },
 ];
 
 @NgModule({
