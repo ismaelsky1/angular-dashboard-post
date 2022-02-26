@@ -1,10 +1,27 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, Routes, RouterModule } from '@angular/router';
+import { DashboardComponent } from './screen/dashboard/dashboard.component';
+import { PostComponent } from './screen/post/post.component';
 
-const routes: Routes = [];
+const routerOptions: ExtraOptions = {
+  // useHash: true,
+  // anchorScrolling: 'enabled',
+  // enableTracing: false,
+};
+
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/Dashboard',
+    pathMatch: 'full',
+    // canActivate: [AuthGuard],
+  },
+  { path: 'Dashboard', component: DashboardComponent },
+  { path: 'Post', component: PostComponent },
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, routerOptions)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
