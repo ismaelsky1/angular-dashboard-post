@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Post {{ data.id }}</h1>
+<form mat-dialog-content [formGroup]="formModal" class="example-form">
+  <mat-form-field class="input-full-width" appearance="legacy">
+    <mat-label>userId</mat-label>
+    <input
+      matInput
+      aria-autocomplete="list"
+      name="userId"
+      id="userId"
+      formControlName="userId"
+    />
+  </mat-form-field>
+  <mat-form-field class="input-full-width" appearance="legacy">
+    <mat-label>Titulo</mat-label>
+    <input
+      matInput
+      aria-autocomplete="list"
+      name="title"
+      id="title"
+      formControlName="title"
+    />
+  </mat-form-field>
+  <mat-form-field class="input-full-width" appearance="legacy">
+    <mat-label>Mensagem</mat-label>
+    <textarea
+      rows="4"
+      matInput
+      aria-autocomplete="list"
+      name="body"
+      id="body"
+      formControlName="body"
+    ></textarea>
+  </mat-form-field>
+</form>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button
+    (click)="onSubmit()"
+    mat-button
+    [mat-dialog-close]="data.id"
+    cdkFocusInitial
+color="primary"
+  >
+    Salvar
+  </button>
+</div>

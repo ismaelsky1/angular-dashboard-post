@@ -1,5 +1,107 @@
-<div class="breadcrumbs">
-  <mat-icon aria-hidden="false">home</mat-icon>
-  <span class="breadcrumbs-span">\</span>
-  <span class="breadcrumbs-span">Post</span>
+<div class="container">
+  <div class="breadcrumbs">
+    <!-- <mat-icon aria-hidden="false">home</mat-icon> -->
+    <span class="breadcrumbs-span">Home</span>
+    <span class="breadcrumbs-span"> / </span>
+    <span class="breadcrumbs-span-active">Post</span>
+  </div>
+  <mat-card
+    class="headerFilter"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between"
+    fxLayoutAlign.xs="center stretch"
+  >
+    <div fxFlex="77%" class="row-filter-input">
+      <input
+        class="inputFilter"
+        [size]="'small'"
+        aria-autocomplete="list"
+        placeholder="Buscar por usuário"
+        [(ngModel)]="filter"
+        [ngModelOptions]="{ standalone: true }"
+        value=""
+      />
+    </div>
+    <div fxFlex="10%" fxFlex.md="100%" style="align-self: center">
+      <button
+        (click)="find()"
+        class="buttonFilter"
+        matInput
+        mat-raised-button
+        color="primary"
+        [disabled]="isLoading == true"
+      >
+        Buscar
+      </button>
+    </div>
+    <div fxFlex="10%" fxFlex.sm="100%" style="align-self: center">
+      <button
+        (click)="clearFilter()"
+        class="buttonClear"
+        matInput
+        mat-raised-button
+        [disabled]="isLoading == true"
+      >
+        Limpar
+      </button>
+    </div>
+  </mat-card>
+
+  <mat-card *ngIf="isLoading == true"
+    ><mat-spinner class="loading" diameter="25"></mat-spinner
+  ></mat-card>
+  <mat-card
+    *ngIf="dataSource.data.length == 0 && isLoading == false"
+    style="text-align: center; color: gray"
+  >
+    <mat-icon aria-hidden="false">inbox</mat-icon><br />Nenhum regístro
+    encontrado
+  </mat-card>
+
+  <table
+    *ngIf="dataSource.data.length > 0"
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z1"
+  >
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Usuario">
+      <th mat-header-cell *matHeaderCellDef>Usuario</th>
+      <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Titulo">
+      <th mat-header-cell *matHeaderCellDef>Titulo</th>
+      <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Mensagem">
+      <th mat-header-cell *matHeaderCellDef>Mensagem</th>
+      <td mat-cell *matCellDef="let element">{{ element.body }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Editar">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="openModal(element)" mat-button color="primary">
+          <mat-icon >keyboard</mat-icon>  Editar
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    class="mat-elevation-z1"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
 </div>

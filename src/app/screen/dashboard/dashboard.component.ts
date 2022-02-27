@@ -11,7 +11,6 @@ import {
   ApexResponsive,
   ApexChart,
 } from 'ng-apexcharts';
-import { todos } from './dashboard.model';
 
 import { DashboardService } from './dashboard.service';
 

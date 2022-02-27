@@ -24,10 +24,20 @@ import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { HttpClientModule } from '@angular/common/http';
-import { DashboardService } from './screen/dashboard/dashboard.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ModalComponent } from './component/modal/modal.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, PostComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    PostComponent,
+    ModalComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -39,7 +49,7 @@ import { DashboardService } from './screen/dashboard/dashboard.service';
 
     MatCommonModule,
     MatButtonModule,
-
+    MatInputModule,
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
@@ -51,6 +61,10 @@ import { DashboardService } from './screen/dashboard/dashboard.service';
     MatPaginatorModule,
     MatSnackBarModule,
     MatCardModule,
+    MatAutocompleteModule,
+    FlexLayoutModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
