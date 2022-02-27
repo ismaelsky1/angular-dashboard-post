@@ -1,49 +1,107 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartComponent } from "ng-apexcharts";
+import {
+  ApexAxisChartSeries,
+  ApexDataLabels,
+  ApexPlotOptions,
+  ApexXAxis,
+  ChartComponent,
+} from 'ng-apexcharts';
 import {
   ApexNonAxisChartSeries,
   ApexResponsive,
-  ApexChart
-} from "ng-apexcharts";
+  ApexChart,
+} from 'ng-apexcharts';
+import { todos } from './dashboard.model';
 
-export type ChartOptions = {
-  series?: ApexNonAxisChartSeries;
-  chart?: ApexChart;
-  responsive?: ApexResponsive[];
-  labels?: any;
+import { DashboardService } from './dashboard.service';
+
+export type ChartOptionsPie = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  labels: any;
+};
+
+export type ChartOptionsBar = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  xaxis: ApexXAxis;
 };
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.sass'],
+  // providers: [DashboardService],
 })
 export class DashboardComponent implements OnInit {
-   @ViewChild("chart") chart: ChartComponent | any;
-  public chartOptions: Partial<ChartOptions> | any;
+  @ViewChild('chart') chartPie: ChartComponent | any;
+  public chartOptionsPie: Partial<ChartOptionsPie> | any;
 
-  constructor() {
-    this.chartOptions = {
-      series: [44, 55],
+  @ViewChild('chart') chartBar: ChartComponent | any;
+  public chartOptionsBar: Partial<ChartOptionsBar> | any;
+
+  constructor(private dashboardService: DashboardService) {}
+
+  ngOnInit(): void {
+    this.dashboardService.dashboard().subscribe((response) => {
+      const tasksCompleted = response.filter((item) => item.completed == true);
+      const tasksPending = response.filter((item) => item.completed == false);
+
+      this.getChartPie(tasksCompleted.length, tasksPending.length);
+      this.getChartBar(tasksCompleted.length, tasksPending.length);
+    });
+  }
+
+  getChartPie(completed: number, pending: number) {
+    this.chartOptionsPie = {
+      series: [completed, pending],
       chart: {
-        width: 380,
-        type: "pie"
+        width: '100%',
+        type: 'pie',
       },
-      labels: ["Team A", "Team B"],
+
+      labels: [`Concluidas`, `Pendentes`],
       responsive: [
         {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200
+              width: 200,
             },
             legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
+              position: 'bottom',
+            },
+          },
+        },
+      ],
     };
   }
 
-  ngOnInit(): void {}
+  getChartBar(completed: number, pending: number) {
+    this.chartOptionsBar = {
+      series: [
+        {
+          name: 'basic',
+          data: [completed, pending],
+        },
+      ],
+      chart: {
+        type: 'bar',
+        height: 310,
+      },
+      plotOptions: {
+        bar: {
+          horizonvtal: true,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      xaxis: {
+        categories: ['Concluidas', 'Pendentes'],
+      },
+    };
+  }
 }

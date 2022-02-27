@@ -10,18 +10,28 @@
   <mat-grid-list cols="2">
     <mat-grid-tile>
       <mat-card class="card">
-        <div id="chart">
+        <div id="chartPie">
           <apx-chart
-            [series]="chartOptions.series"
-            [chart]="chartOptions.chart"
-            [labels]="chartOptions.labels"
-            [responsive]="chartOptions.responsive"
+            [series]="chartOptionsPie.series"
+            [chart]="chartOptionsPie.chart"
+            [labels]="chartOptionsPie.labels"
+            [responsive]="chartOptionsPie.responsive"
           ></apx-chart>
         </div>
       </mat-card>
     </mat-grid-tile>
     <mat-grid-tile>
-      <mat-card class="card">Simple card</mat-card>
+      <mat-card class="card">
+        <div id="chartBar">
+          <apx-chart
+            [series]="chartOptionsBar.series"
+            [chart]="chartOptionsBar.chart"
+            [dataLabels]="chartOptionsBar.dataLabels"
+            [plotOptions]="chartOptionsBar.plotOptions"
+            [xaxis]="chartOptionsBar.xaxis"
+          ></apx-chart>
+        </div>
+      </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
