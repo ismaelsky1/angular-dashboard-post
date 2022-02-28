@@ -7,6 +7,7 @@ import {
   ViewChild,
   OnChanges,
 } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   ApexAxisChartSeries,
   ApexDataLabels,
@@ -51,9 +52,13 @@ export class DashboardComponent
   @ViewChild('chart') chartBar: ChartComponent | any;
   public chartOptionsBar: Partial<ChartOptionsBar> | any;
 
+  tasks!: number;
   isLoading = true;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngAfterViewInit() {}
 
@@ -68,20 +73,32 @@ export class DashboardComponent
     this.getChartBar(0, 0);
     this.isLoading = true;
 
-    this.dashboardService.dashboard().subscribe((response) => {
-      const tasksCompleted = response.filter((item) => item.completed == true);
-      const tasksPending = response.filter((item) => item.completed == false);
+    this.dashboardService.dashboard().subscribe(
+      (response) => {
+        this.tasks = response.length;
+        const tasksCompleted = response.filter(
+          (item) => item.completed == true
+        );
+        const tasksPending = response.filter((item) => item.completed == false);
 
-      //Delay so para demostrar skeleton dos cards.
-      setTimeout(() => {
-        this.getChartPie(tasksCompleted.length, tasksPending.length);
+        //Delay so para demostrar skeleton dos cards.
+        setTimeout(() => {
+          this.getChartPie(tasksCompleted.length, tasksPending.length);
+          this.isLoading = false;
+        }, 2000);
+        //Delay so para demostrar skeleton dos cards.
+        setTimeout(() => {
+          this.getChartBar(tasksCompleted.length, tasksPending.length);
+        }, 2000);
+      },
+      (err) => {
         this.isLoading = false;
-      }, 2000);
-      //Delay so para demostrar skeleton dos cards.
-      setTimeout(() => {
-        this.getChartBar(tasksCompleted.length, tasksPending.length);
-      }, 2000);
-    });
+        this._snackBar.open('Erro, tente novamente mais tarde', '', {
+          duration: 2500,
+          panelClass: ['red-snackbar'],
+        });
+      }
+    );
   }
 
   getChartPie(completed: number, pending: number) {

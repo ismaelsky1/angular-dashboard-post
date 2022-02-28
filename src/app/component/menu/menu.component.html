@@ -1,0 +1,20 @@
+<mat-drawer fxHide.xs class="side" mode="side" opened>
+  <a routerLink="Dashboard">
+    <img class="logo" src="../assets/user.png" />
+  </a>
+  <h4>Usuário</h4>
+  <h6>Administrador</h6>
+  <mat-selection-list [multiple]="false">
+    <mat-list-option
+      #item
+      class="item"
+      routerLink="dashboard"
+      value="Dashboard"
+    >
+      Dashboard
+    </mat-list-option>
+    <mat-list-option #item class="item" routerLink="post" value="Post">
+      Post
+    </mat-list-option>
+  </mat-selection-list>
+</mat-drawer>

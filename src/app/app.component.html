@@ -1,14 +1,19 @@
 <mat-drawer-container class="layout">
   <mat-drawer fxHide.xs class="side" mode="side" opened>
-    <a routerLink="Dashboard">
-      <img class="logo" src="../assets/logo-box.png" />
-    </a>
+    <div class="headerMenu">
+      <a routerLink="Dashboard">
+        <img class="logo" src="../assets/user.png" />
+      </a>
+      <h4 class="titleMenu">Usuário</h4>
+      <h6 class="subTitleMenu">Administrador</h6>
+    </div>
     <mat-selection-list [multiple]="false">
       <mat-list-option
         #item
         class="item"
         routerLink="dashboard"
         value="Dashboard"
+        selected
       >
         Dashboard
       </mat-list-option>
