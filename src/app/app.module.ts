@@ -30,6 +30,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from './component/modal/modal.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ContentLoaderModule } from '@ngneat/content-loader';
+import { NgxSkeletonModule } from 'ngx-skeleton';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     ReactiveFormsModule,
     NgApexchartsModule,
-
+    
+    NgxSkeletonModule,
+    ContentLoaderModule,
     MatCommonModule,
     MatButtonModule,
     MatInputModule,

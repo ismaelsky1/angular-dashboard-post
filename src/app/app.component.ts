@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
+  isDesktop: boolean = false;
 
+  isVisibleOnDesktop() {
+    this.isDesktop = true;
+  }
 }

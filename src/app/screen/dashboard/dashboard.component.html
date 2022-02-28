@@ -6,23 +6,31 @@
     <span class="breadcrumbs-span"> / </span>
     <span class="breadcrumbs-span-active">Dashboard</span>
   </div>
-
-  <mat-grid-list cols="2">
-    <mat-grid-tile>
-      <mat-card class="card">
-        <div id="chartPie">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+    <mat-card fxFlex="100%" fxFlex.lt-md="50%"  class="card">
+      <div id="chartPie">
+        <ng-container *ngIf="!isLoading; else loadingPie">
           <apx-chart
+            *ngIf="chartOptionsPie.series.length > 0"
             [series]="chartOptionsPie.series"
             [chart]="chartOptionsPie.chart"
             [labels]="chartOptionsPie.labels"
             [responsive]="chartOptionsPie.responsive"
           ></apx-chart>
-        </div>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card class="card">
-        <div id="chartBar">
+        </ng-container>
+        <ng-template #loadingPie>
+          <ngx-skeleton
+            height="350px"
+            width="350px"
+            margin="auto auto auto auto"
+            borderRadius="500px"
+          ></ngx-skeleton>
+        </ng-template>
+      </div>
+    </mat-card>
+    <mat-card fxFlex="100%" fxFlex.lt-md="50%" class="card">
+      <div id="chartBar">
+        <ng-container *ngIf="!isLoading; else loadingBar">
           <apx-chart
             [series]="chartOptionsBar.series"
             [chart]="chartOptionsBar.chart"
@@ -30,8 +38,80 @@
             [plotOptions]="chartOptionsBar.plotOptions"
             [xaxis]="chartOptionsBar.xaxis"
           ></apx-chart>
+        </ng-container>
+        <ng-template fxLayout="row" fxLayoutAlign="center center" #loadingBar>
+          <ngx-skeleton
+            fxFlex="100%"
+            height="350px"
+            width="150px"
+            margin="auto auto auto auto"
+            borderRadius="20px"
+          ></ngx-skeleton>
+          <ngx-skeleton
+            fxFlex="50%"
+            height="350px"
+            width="150px"
+            margin="auto auto auto auto"
+            borderRadius="20px"
+          ></ngx-skeleton>
+        </ng-template>
+      </div>
+    </mat-card>
+  </div>
+  <!-- <mat-grid-list cols="2">
+    <mat-grid-tile>
+      <mat-card class="card">
+        <div id="chartPie">
+          <ng-container *ngIf="!isLoading; else loadingPie">
+            <apx-chart
+              *ngIf="chartOptionsPie.series.length > 0"
+              [series]="chartOptionsPie.series"
+              [chart]="chartOptionsPie.chart"
+              [labels]="chartOptionsPie.labels"
+              [responsive]="chartOptionsPie.responsive"
+            ></apx-chart>
+          </ng-container>
+          <ng-template #loadingPie>
+            <ngx-skeleton
+              height="350px"
+              width="350px"
+              margin="auto auto auto auto"
+              borderRadius="500px"
+            ></ngx-skeleton>
+          </ng-template>
         </div>
       </mat-card>
     </mat-grid-tile>
-  </mat-grid-list>
+    <mat-grid-tile>
+      <mat-card class="card">
+        <div id="chartBar">
+          <ng-container *ngIf="!isLoading; else loadingBar">
+            <apx-chart
+              [series]="chartOptionsBar.series"
+              [chart]="chartOptionsBar.chart"
+              [dataLabels]="chartOptionsBar.dataLabels"
+              [plotOptions]="chartOptionsBar.plotOptions"
+              [xaxis]="chartOptionsBar.xaxis"
+            ></apx-chart>
+          </ng-container>
+          <ng-template fxLayout="row" fxLayoutAlign="center center" #loadingBar>
+            <ngx-skeleton
+              fxFlex="100%"
+              height="350px"
+              width="150px"
+              margin="auto auto auto auto"
+              borderRadius="20px"
+            ></ngx-skeleton>
+            <ngx-skeleton
+              fxFlex="50%"
+              height="350px"
+              width="150px"
+              margin="auto auto auto auto"
+              borderRadius="20px"
+            ></ngx-skeleton>
+          </ng-template>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list> -->
 </div>

@@ -1,4 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  DoCheck,
+  OnInit,
+  ViewChild,
+  OnChanges,
+} from '@angular/core';
 import {
   ApexAxisChartSeries,
   ApexDataLabels,
@@ -34,22 +42,44 @@ export type ChartOptionsBar = {
   styleUrls: ['./dashboard.component.sass'],
   // providers: [DashboardService],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent
+  implements AfterViewInit, AfterContentInit, AfterViewInit, DoCheck, OnChanges
+{
   @ViewChild('chart') chartPie: ChartComponent | any;
   public chartOptionsPie: Partial<ChartOptionsPie> | any;
 
   @ViewChild('chart') chartBar: ChartComponent | any;
   public chartOptionsBar: Partial<ChartOptionsBar> | any;
 
+  isLoading = true;
+
   constructor(private dashboardService: DashboardService) {}
 
+  ngAfterViewInit() {}
+
+  ngAfterContentInit() {}
+
+  ngDoCheck() {}
+
+  ngOnChanges() {}
+
   ngOnInit(): void {
+    this.getChartPie(0, 0);
+    this.getChartBar(0, 0);
+    this.isLoading = true;
+
     this.dashboardService.dashboard().subscribe((response) => {
       const tasksCompleted = response.filter((item) => item.completed == true);
       const tasksPending = response.filter((item) => item.completed == false);
 
-      this.getChartPie(tasksCompleted.length, tasksPending.length);
-      this.getChartBar(tasksCompleted.length, tasksPending.length);
+      setTimeout(() => {
+        this.getChartPie(tasksCompleted.length, tasksPending.length);
+        this.isLoading = false;
+      }, 3000);
+
+      setTimeout(() => {
+        this.getChartBar(tasksCompleted.length, tasksPending.length);
+      }, 3000);
     });
   }
 
