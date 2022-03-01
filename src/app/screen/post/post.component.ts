@@ -43,7 +43,6 @@ export class PostComponent implements OnInit, AfterViewInit {
       (response) => {
         this.dataSource = new MatTableDataSource<Post>(response);
         this.dataSource.paginator = this.paginator;
-        console.log(this.dataSource);
         this.isLoading = false;
       },
       (err) => {

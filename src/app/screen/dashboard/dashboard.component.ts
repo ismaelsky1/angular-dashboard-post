@@ -81,15 +81,9 @@ export class DashboardComponent
         );
         const tasksPending = response.filter((item) => item.completed == false);
 
-        //Delay so para demostrar skeleton dos cards.
-        setTimeout(() => {
-          this.getChartPie(tasksCompleted.length, tasksPending.length);
-          this.isLoading = false;
-        }, 2000);
-        //Delay so para demostrar skeleton dos cards.
-        setTimeout(() => {
-          this.getChartBar(tasksCompleted.length, tasksPending.length);
-        }, 2000);
+        this.getChartPie(tasksCompleted.length, tasksPending.length);
+        this.getChartBar(tasksCompleted.length, tasksPending.length);
+        this.isLoading = false;
       },
       (err) => {
         this.isLoading = false;
@@ -106,6 +100,7 @@ export class DashboardComponent
       series: [completed, pending],
       chart: {
         // width: '80%',
+        height: "310px",
         type: 'pie',
       },
       labels: [`Concluidas`, `Pendentes`],

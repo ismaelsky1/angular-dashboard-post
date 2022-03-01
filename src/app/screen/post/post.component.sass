@@ -1,39 +1,57 @@
-.container
+.header
+    padding: 1%
+    padding-left: 20px
+    background: #3F51B5
+    color: #ffffff
+    height: 150px
+    align-content: center
+    align-items: center
+    align-self: center
+.title
+    padding-left: 5px
+.body
+    position: relative
+    top: -105px
     padding: 2%
 
 .headerFilter
     background: #ffffff
     margin-bottom: 10px
     padding: 0px
-    padding-right: 10px
+    // padding-right: 10px
+    position: relative
+    display: flex
 
 .breadcrumbs-span
     position: relative
     top: -5px
     padding-left: 5px
-    color: #9E9E9E
-    font-weight: 500
+    color: #ebebeb
+    font-weight: 100
 
 .breadcrumbs-span-active
     position: relative
     top: -5px
     padding-left: 5px
-    color: #2E87FF
-    font-weight: 500
+    color: #fff
+    font-weight: 100
 
 .row-filter-input
+    width: 87.5%
     margin: 10px
     padding: 5px
     align-self: center
 
 .inputFilter
-    border: 1px solid #e4e4e4
-    border-radius: 5px
-    padding: 5px
-    padding-left: 10px
+    border: none
+    border-color: transparent
+    // padding: 5px
+    // padding-left: 10px
     top: 4px
     position: relative
-.inputFilter
+    width: 100%
+    outline: none
+    font-size: 16px
 
 .example-full-width
     min-width: 150px
@@ -48,7 +66,6 @@
 .buttonClear
     width: 100%!important
     min-width: unset!important
-    // margin-left: 10px
 
 .loading
     margin-left: auto
@@ -58,7 +75,12 @@
     padding-left: 20px
     padding-right: 20px
 
-.mat-elevation-z8
+th
+    border-radius: 8px 8px 0px 0px
+
+table
+    border-radius: 8px 8px 0px 0px
     width: 100%
-    border-radius: 12px !important
-    background: red
+
+mat-paginator   
+    border-radius: 0px 0px 8px 8px

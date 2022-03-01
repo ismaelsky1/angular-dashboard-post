@@ -6,9 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
-  isDesktop: boolean = false;
+  isOpenedSide: boolean = false;
 
-  isVisibleOnDesktop() {
-    this.isDesktop = true;
+  openedSide(e: any) {
+    this.isOpenedSide = !this.isOpenedSide;
+  }
+
+  openedSideChanger(e: any) {
+    if (e !== this.isOpenedSide) {
+      this.isOpenedSide = !this.isOpenedSide;
+    }
   }
 }

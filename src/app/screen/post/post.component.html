@@ -1,10 +1,12 @@
-<div class="container">
-  <div class="breadcrumbs">
-    <!-- <mat-icon aria-hidden="false">home</mat-icon> -->
+<div class="header">
+  <h1 class="title">Post</h1>
+  <div fxHide.xs class="breadcrumbs">
     <span class="breadcrumbs-span">Home</span>
-    <span class="breadcrumbs-span"> / </span>
+    <span class="breadcrumbs-span">/</span>
     <span class="breadcrumbs-span-active">Post</span>
   </div>
+</div>
+<div class="body">
   <mat-card
     class="headerFilter"
     fxLayout="row"
@@ -12,10 +14,9 @@
     fxLayoutAlign="space-between"
     fxLayoutAlign.xs="center stretch"
   >
-    <div fxFlex="77%" class="row-filter-input">
+    <div fxFlex.lg="77%" fxFlex.xs="100%" class="row-filter-input">
       <input
         class="inputFilter"
-        [size]="'small'"
         aria-autocomplete="list"
         placeholder="Buscar por usuário"
         [(ngModel)]="filter"
@@ -23,7 +24,7 @@
         value=""
       />
     </div>
-    <div fxFlex="10%" fxFlex.md="100%" style="align-self: center">
+    <div style="align-self: center; width: 90%" fxFlex="100%" fxFlex.lg="10%">
       <button
         (click)="find()"
         class="buttonFilter"
@@ -35,12 +36,17 @@
         Buscar
       </button>
     </div>
-    <div fxFlex="10%" fxFlex.sm="100%" style="align-self: center">
+    <div fxFlex="1%"></div>
+    <div
+      style="align-self: center; width: 90%"
+      fxFlex.lg="10%"
+      fxFlex.xs="100%"
+    >
       <button
         (click)="clearFilter()"
         class="buttonClear"
         matInput
-        mat-raised-button
+        mat-button
         [disabled]="isLoading == true"
       >
         Limpar
@@ -52,7 +58,7 @@
     ><mat-spinner class="loading" diameter="25"></mat-spinner
   ></mat-card>
   <mat-card
-    *ngIf="dataSource.data.length == 0 && isLoading == false"
+    *ngIf="dataSource?.data?.length == 0 && isLoading == false"
     style="text-align: center; color: gray"
   >
     <mat-icon aria-hidden="false">inbox</mat-icon><br />Nenhum regístro
@@ -60,7 +66,7 @@
   </mat-card>
 
   <table
-    *ngIf="dataSource.data.length > 0"
+    *ngIf="dataSource?.data?.length > 0"
     mat-table
     [dataSource]="dataSource"
     class="mat-elevation-z1"
@@ -81,15 +87,15 @@
     </ng-container>
 
     <ng-container matColumnDef="Mensagem">
-      <th mat-header-cell *matHeaderCellDef>Mensagem</th>
-      <td mat-cell *matCellDef="let element">{{ element.body }}</td>
+      <th fxHide.xs mat-header-cell *matHeaderCellDef>Mensagem</th>
+      <td fxHide.xs mat-cell *matCellDef="let element">{{ element.body }}</td>
     </ng-container>
 
     <ng-container matColumnDef="Editar">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
         <button (click)="openModal(element)" mat-button color="primary">
-          <mat-icon >keyboard</mat-icon>  Editar
+          <mat-icon>keyboard</mat-icon> <label fxHide.xs >Editar</label>
         </button>
       </td>
     </ng-container>
@@ -101,7 +107,6 @@
     class="mat-elevation-z1"
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons
-    aria-label="Select page of periodic elements"
   >
   </mat-paginator>
 </div>

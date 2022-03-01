@@ -15,39 +15,65 @@
         value="Dashboard"
         selected
       >
-        Dashboard
+        <mat-icon mat-list-icon>home</mat-icon>
+        <div mat-line>Dashboard</div>
       </mat-list-option>
       <mat-list-option #item class="item" routerLink="post" value="Post">
-        Post
+        <mat-icon mat-list-icon>inbox</mat-icon>
+        <div mat-line>Post</div>
       </mat-list-option>
     </mat-selection-list>
   </mat-drawer>
+
   <mat-drawer-content class="content">
     <mat-toolbar class="header">
-      <!-- <button
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with menu icon"
-      >
-        <mat-icon>menu</mat-icon>
-      </button> -->
-      <span>View!</span>
+      <span>My Dashboard</span>
       <span class="example-spacer"></span>
-      <button
-        mat-icon-button
-        class="example-icon favorite-icon"
-        aria-label="Example icon-button with heart icon"
-      >
-        <mat-icon>palette</mat-icon>
-      </button>
-      <!-- <button
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with share icon"
-      >
-        <mat-icon>share</mat-icon>
-      </button> -->
+      <div fxHide.gt-xs>
+        <button (click)="openedSide($event)" mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
+
+<mat-drawer
+  fxHide.gt-xs
+  class="side"
+  mode="over"
+  [opened]="isOpenedSide"
+  (openedChange)="openedSideChanger($event)"
+>
+  <div class="headerMenu">
+    <a routerLink="Dashboard">
+      <img class="logo" src="../assets/user.png" />
+    </a>
+    <h4 class="titleMenu">Usuário</h4>
+    <h6 class="subTitleMenu">Administrador</h6>
+  </div>
+  <mat-selection-list [multiple]="false">
+    <mat-list-option
+      #item
+      class="item"
+      routerLink="dashboard"
+      value="Dashboard"
+      selected
+      (click)="openedSide($event)"
+    >
+      <mat-icon mat-list-icon>home</mat-icon>
+      <div mat-line>Dashboard</div>
+    </mat-list-option>
+    <mat-list-option
+      (click)="openedSide($event)"
+      #item
+      class="item"
+      routerLink="post"
+      value="Post"
+    >
+      <mat-icon mat-list-icon>inbox</mat-icon>
+      <div mat-line>Post</div>
+    </mat-list-option>
+  </mat-selection-list>
+</mat-drawer>
