@@ -32,7 +32,6 @@ import { ModalComponent } from './component/modal/modal.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ContentLoaderModule } from '@ngneat/content-loader';
 import { NgxSkeletonModule } from 'ngx-skeleton';
-import { MenuComponent } from './component/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,6 @@ import { MenuComponent } from './component/menu/menu.component';
     DashboardComponent,
     PostComponent,
     ModalComponent,
-    MenuComponent,
   ],
   imports: [
     BrowserModule,
